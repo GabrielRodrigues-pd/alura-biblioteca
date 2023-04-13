@@ -1,0 +1,38 @@
+// Iniciando com o express
+import express from 'express';
+// Instancia do express
+const app = express();
+
+// Interpretar o json
+app.use(express.json());
+
+const livros = [
+  { id: 1, titulo: 'Senhor dos Aneis' },
+  { id: 2, titulo: 'O Hobiit' },
+];
+
+app.get('/', (req, res) => {
+  res.status(200).send('Curso de Node');
+});
+
+app.get('/livros', (req, res) => {
+  res.status(200).json(livros);
+});
+
+app.post('/livros', (req, res) => {
+  livros.push(req.body);
+  res.status(201).send('Livro cadastrado');
+});
+
+app.put('/livros/:id', (req, res) => {
+  let index = getIndexLivro(req.params.id);
+  livros[index].titulo = req.body.titulo;
+
+  res.json(livros);
+});
+
+function getIndexLivro(id) {
+  return livros.findIndex(livro => livro.id === id);
+}
+
+export default app;

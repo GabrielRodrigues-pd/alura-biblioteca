@@ -32,7 +32,7 @@ app.put('/livros/:id', (req, res) => {
 });
 
 function getIndexLivro(id) {
-  return livros.findIndex(livro => livro.id === id);
+  return livros.findIndex(livro => livro.id == id);
 }
 
 export default app;
